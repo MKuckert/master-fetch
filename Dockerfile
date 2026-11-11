@@ -55,7 +55,8 @@ RUN pip install ".[all]"
 # `--with-deps` pulls in the Chromium shared-library stack (fonts, X11 stubs,
 # nss, etc.). Patchright's patched Chromium is installed alongside into the
 # same PLAYWRIGHT_BROWSERS_PATH.
-RUN playwright install --with-deps chromium \
+RUN mkdir /ms-playwright \
+    && patchright install --with-deps chromium \
     && patchright install chromium \
     && rm -rf /var/lib/apt/lists/* /build \
     && chmod -R a+rX "$PLAYWRIGHT_BROWSERS_PATH"
